@@ -42,6 +42,12 @@ function fonts() {
     pipe(gulp.dest('dist/assets/fonts'));
 }
 
+// copy icons
+function icons() {
+    gulp.src(['./src/icons/**/*']).
+    pipe(gulp.dest('dist/assets/icons'));
+}
+
 // live-server
 function watch() {
     browserSync.init({
@@ -53,10 +59,12 @@ function watch() {
     gulp.watch('./src/html/**/*.html', html);
     gulp.watch('./src/images/*', minifyImgs);
     gulp.watch('./src/fonts/*', fonts);
+    gulp.watch('./src/icons/*', icons);
     gulp.watch('./src/html/*.html').on('change', browserSync.reload);
     gulp.watch('./src/js/**/*.js').on('change', browserSync.reload);
     gulp.watch('./src/images/*').on('change', browserSync.reload);
     gulp.watch('./src/fonts/*').on('change', browserSync.reload);
+    gulp.watch('./src/icons/*').on('change', browserSync.reload);
 }
 
 exports.watch = watch;
