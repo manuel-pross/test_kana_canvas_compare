@@ -1,0 +1,12 @@
+// Bootstrap Grid
+@import "node_modules/bootstrap/scss/bootstrap-grid";
+
+// Normalize
+@import "node_modules/normalize.scss/normalize";
+
+// Custom
+@import 'variables';
+
+.container {
+    background-color: yellow;
+}
