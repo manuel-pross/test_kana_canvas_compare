@@ -4,9 +4,13 @@
 // Normalize
 @import "node_modules/normalize.scss/normalize";
 
+// Fonts
+@import './fonts.scss';
+
 // Custom
 @import './variables';
+@import './test';
 
 h1 {
-    color: blue;
+    color: yellow;
 }

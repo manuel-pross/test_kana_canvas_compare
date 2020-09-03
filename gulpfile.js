@@ -9,7 +9,7 @@ const browserSync = require('browser-sync').create();
 // compile scss into css + minify
 function style() {
     // find scss
-    return gulp.src('./src/scss/**/*.scss')
+    return gulp.src('./src/scss/style.scss')
     // pass through sass compile
     .pipe(sass().on('error', sass.logError))
     // bundle css
@@ -36,6 +36,12 @@ function minifyImgs() {
     .pipe(gulp.dest('dist/assets/images'))
 }
 
+// copy fonts
+function fonts() {
+    gulp.src(['./src/fonts/**/*']).
+    pipe(gulp.dest('dist/assets/fonts'));
+}
+
 // live-server
 function watch() {
     browserSync.init({
@@ -46,9 +52,11 @@ function watch() {
     gulp.watch('./src/scss/**/*.scss', style);
     gulp.watch('./src/html/**/*.html', html);
     gulp.watch('./src/images/*', minifyImgs);
+    gulp.watch('./src/fonts/*', fonts);
     gulp.watch('./src/html/*.html').on('change', browserSync.reload);
     gulp.watch('./src/js/**/*.js').on('change', browserSync.reload);
     gulp.watch('./src/images/*').on('change', browserSync.reload);
+    gulp.watch('./src/fonts/*').on('change', browserSync.reload);
 }
 
 exports.watch = watch;
