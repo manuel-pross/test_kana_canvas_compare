@@ -5,8 +5,8 @@
 @import "node_modules/normalize.scss/normalize";
 
 // Custom
-@import 'variables';
+@import './variables';
 
-.container {
-    background-color: yellow;
+h1 {
+    color: blue;
 }

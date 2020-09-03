@@ -2,14 +2,18 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const htmlmin = require('gulp-htmlmin');
+const imagemin = require('gulp-imagemin');
+const concatCss = require('gulp-concat-css');
 const browserSync = require('browser-sync').create();
 
-// compile scss into css
+// compile scss into css + minify
 function style() {
     // find scss
     return gulp.src('./src/scss/**/*.scss')
     // pass through sass compile
     .pipe(sass().on('error', sass.logError))
+    // bundle css
+    .pipe(concatCss("style.css"))
     // minify css
     .pipe(cleanCSS({compatibility: 'ie8'}))
     // where to save compiled css
@@ -19,13 +23,20 @@ function style() {
 }
 
 // minify HTML
-
 function html() {
     return gulp.src('src/html/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'));
 }
 
+// minify Imgs
+function minifyImgs() {
+    return gulp.src('./src/images/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/assets/images'))
+}
+
+// live-server
 function watch() {
     browserSync.init({
         server: {
@@ -34,9 +45,10 @@ function watch() {
     });
     gulp.watch('./src/scss/**/*.scss', style);
     gulp.watch('./src/html/**/*.html', html);
+    gulp.watch('./src/images/*', minifyImgs);
     gulp.watch('./src/html/*.html').on('change', browserSync.reload);
     gulp.watch('./src/js/**/*.js').on('change', browserSync.reload);
+    gulp.watch('./src/images/*').on('change', browserSync.reload);
 }
 
-exports.style = style;
 exports.watch = watch;
