@@ -1,12 +1,18 @@
-html {
-    background-color: $color2;
-}
 
-.soNeKlasseHalt {
-    font-family: $font-main-3;
-}
 
-img {
-    width: 100px;
-    height: 100px;
+.canvas {
+    &__wrapper {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__template {
+        border: 1px solid black;
+    }
+
+    &__drawing {
+        border: 1px solid black;
+    }
 }
